@@ -1,0 +1,5 @@
+﻿  main.cpp
+d:\vsworkspace\mpi_leader_election\mpi_leader_election\main.cpp(12): warning C4101: 'message': unreferenced local variable
+d:\vsworkspace\mpi_leader_election\mpi_leader_election\main.cpp(12): warning C4101: 'partner': unreferenced local variable
+  MPI_Leader_Election.vcxproj -> D:\vsworkspace\MPI_Leader_Election\Debug\MPI_Leader_Election.exe
+  MPI_Leader_Election.vcxproj -> D:\vsworkspace\MPI_Leader_Election\Debug\MPI_Leader_Election.pdb (Full PDB)
