@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv) {
 
-	int numprocs, procid, len, partner, message;
+	int numprocs, procid, len;
     int value = 0;
     int value_id_pair[2] = { 0, 0 };
     int recv_value_id_pair[2] = { 0, 0 };
@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 	MPI_Status status;
 	
 
-	srand(time(NULL));
+	srand(time(NULL) + procid);
 	value = rand() % numprocs;
     printf("Process %d generated number: %d \n", procid, value);
     value_id_pair[0] = value;
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
         if (i != procid)
         {
             MPI_Send(&value_id_pair, 2, MPI_INT, i, 0, MPI_COMM_WORLD);
-            MPI_Recv(&recv_value_id_pair, 2, MPI_INT, i, procid, MPI_COMM_WORLD, &status);
+            MPI_Recv(&recv_value_id_pair, 2, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
             if (max_value_id_pair[0] < recv_value_id_pair[0])
             {
                 max_value_id_pair[0] = recv_value_id_pair[0];
@@ -49,17 +49,13 @@ int main(int argc, char** argv) {
         }
     }
 
-    for (int i = 0; i < numprocs;i++)
+    if(procid == 0)
     {
-        if (i != procid)
-        {
-           
-        }
+        printf("Leader is process %d with the value: %d", max_value_id_pair[1], max_value_id_pair[0]);
     }
 
-
     MPI_Finalize();
-    printf("Leader is process %d with the value: %d", max_value_id_pair[1], max_value_id_pair[0]);
+
 
 	
 
